@@ -1,0 +1,13 @@
+Your task now is to analyse the contents of this abstract, and return a probability score indicating if this abstract is relevant to NF1 with GIST and / or (soft tissue) sarcoma / MEN1:
+
+{abstract}
+
+======
+
+Your task:
+Check how relevant this abstract is for the specific case of NF1 with GIST and / or (soft tissue) sarcoma (MEN1) and shows promise for a (possible) treatment.
+
+Please return a json response without extra added text or characters like new lines in the format below:
+{json_format}
+
+Be thoughtful, it should be relevant to this specific type of cancer. Thank you!
