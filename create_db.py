@@ -18,12 +18,14 @@ except sqlite3.OperationalError:
 
 cursor = connection.cursor()
 
-cursor.execute("CREATE TABLE IF NOT EXISTS query (id INTEGER PRIMARY KEY, uuid CHAR(32), prompt TEXT, url TEXT, article_count INT, match_count INT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS query (id INTEGER PRIMARY KEY, uuid CHAR(32), prompt TEXT, url TEXT, article_count INT, match_count INT)")   #TODO: deprecate match_count
 cursor.execute("CREATE TABLE IF NOT EXISTS papers (id INTEGER PRIMARY KEY, uuid CHAR(32), query_id INT, url TEXT, title TEXT, abstract TEXT, page_nr INT, article_nr INT, status INT DEFAULT 1, avg_score REAL)")
 cursor.execute("CREATE TABLE IF NOT EXISTS failed_pages(id INTEGER PRIMARY KEY, uuid CHAR(32), query_id INT, url TEXT)")
-cursor.execute("CREATE TABLE IF NOT EXISTS review(id INTEGER PRIMARY KEY, uuid CHAR(32), paper_id INT, raw TEXT, reason TEXT, score REAL)")
 
-for table in ["query","papers","failed_pages",'review',]:
+cursor.execute("CREATE TABLE IF NOT EXISTS llm_prompt(id INTEGER PRIMARY KEY, uuid CHAR(32), prompt TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS llm_review(id INTEGER PRIMARY KEY, uuid CHAR(32), prompt_id, paper_id INT, raw TEXT, reason TEXT, score REAL)")
+
+for table in ["query","papers","failed_pages",'llm_prompt','llm_review']:
     trigger_name = f"trigger_{table}_uuid"
 
     check_trigger_sql = f"select count(*) from sqlite_master where type = 'trigger' and name = '{trigger_name}'"

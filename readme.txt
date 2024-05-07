@@ -16,7 +16,7 @@ Scrape abstracts for a given query:
 
 Now apply analysis on the abstracts to filter on relevant articles, we can try multiple promps for our "relevance" filter:
 
-    python analyse.py --db_name test.db --key "YOUR_KEY_HERE" --prompt prompt-gist1.txt
+    python analyze.py --db_name test.db --key "YOUR_KEY_HERE" --prompt prompt-gist1.txt
     * This process can/should be run multiple times, with different prompts
 
 
